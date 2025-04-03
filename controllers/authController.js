@@ -49,19 +49,17 @@ exports.login = async (req, res) => {
 
     const token = generateToken(user);
 
-    res.cookie("jwt", token, {
+    res.cookie("token", token, {
       httpOnly: true,
-      // secure: false, // ❌ ปิด secure เพราะ localhost ใช้ HTTP
+      // sameSite: "Strict",
+      // secure: false /*  ❌ ปิด secure เพราะ localhost ใช้ HTTP */,
       // sameSite: "Lax", // ✅ อนุญาตให้ส่ง Cookie ข้าม Domain ได้ (แต่ต้องอยู่ในเครือข่ายเดียวกัน)
       secure: process.env.NODE_ENV === "production", // ใช้ secure mode ใน production
       maxAge: 3600000, // 1 ชม.
     });
 
-    res.json({ message: "เข้าสู่ระบบสำเร็จ" });
-
     res.json({
       message: "เข้าสู่ระบบสำเร็จ",
-      jwt: token,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -6,7 +6,7 @@ const {
   profile,
 } = require("../controllers/authController");
 
-const protect = require("../middleware/protect"); // นำเข้า protect middleware
+const protect = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
@@ -14,7 +14,10 @@ router.post("/register", register);
 router.post("/login", login);
 router.post("/logout", logout);
 
-// Route ที่ต้องการการตรวจสอบ JWT ก่อนเข้าถึง (ใช้ protect middleware)
-router.get("/profile", protect, profile); // ใช้ protect middleware ก่อนให้เข้าถึงโปรไฟล์
+router.get("/profile", protect, (req, res) => {
+  res.json({
+    user: req.user,
+  });
+});
 
 module.exports = router;
