@@ -9,6 +9,15 @@ const generateToken = (user) => {
   });
 };
 
+// ฟังก์ชันสำหรับโปรไฟล์ของผู้ใช้งาน
+exports.profile = (req, res) => {
+  // ข้อมูลของผู้ใช้จะถูกเก็บไว้ใน req.user หลังจากผ่าน middleware protect
+  res.json({
+    message: "ข้อมูลโปรไฟล์ผู้ใช้",
+    user: req.user, // ข้อมูลของผู้ใช้งานที่ถูกถอดรหัสจาก JWT
+  });
+};
+
 // Register
 exports.register = async (req, res) => {
   try {
