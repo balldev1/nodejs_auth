@@ -16,7 +16,8 @@ app.use("/api/auth", require("./routes/authRoutes"));
 // สำหรับการเข้าถึงไฟล์อัปโหลด
 // app.use("/uploads", express.static(path.join(__dirname, "public")));
 // เส้นทางสำหรับ API
-app.use("/public", express.static(path.join(__dirname, "public")));
+app.use("/network", express.static(path.join(__dirname, "public", "network")));
+
 app.use("/api/auth/network", require("./routes/networkRoute"));
 
 const PORT = process.env.PORT || 5555;

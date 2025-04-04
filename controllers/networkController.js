@@ -3,6 +3,20 @@ const path = require("path");
 const fs = require("fs");
 const Network = require("../models/Network");
 
+// ฟังก์ชันสำหรับดึงโพสต์ทั้งหมด
+const getPosts = async (req, res) => {
+  try {
+    // ดึงข้อมูลทั้งหมดจาก collection Network
+    const posts = await Network.find();
+
+    // ส่งข้อมูลกลับ
+    res.status(200).json(posts);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
 // ฟังก์ชันสำหรับสร้างโพสต์ใหม่
 const createPost = async (req, res) => {
   try {
@@ -13,7 +27,7 @@ const createPost = async (req, res) => {
     if (req.file) {
       const originalImagePath = path.join(
         __dirname,
-        "../public", // เปลี่ยนจาก "../public" เป็น "../uploads"
+        "../public",
         req.file.filename
       ); // Path ของไฟล์ภาพที่อัปโหลด
 
@@ -55,4 +69,4 @@ const createPost = async (req, res) => {
   }
 };
 
-module.exports = { createPost };
+module.exports = { getPosts, createPost };

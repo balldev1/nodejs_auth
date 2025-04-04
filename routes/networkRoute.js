@@ -4,7 +4,7 @@ const path = require("path");
 const router = express.Router();
 
 // นำเข้าฟังก์ชันจาก controller
-const { createPost } = require("../controllers/networkController");
+const { createPost, getPosts } = require("../controllers/networkController");
 
 // ตั้งค่า Multer สำหรับการอัปโหลดไฟล์
 const storage = multer.diskStorage({
@@ -20,5 +20,6 @@ const upload = multer({ storage });
 
 // เส้นทางสำหรับสร้างโพสต์
 router.post("/", upload.single("image"), createPost);
+router.get("/", getPosts);
 
 module.exports = router;
