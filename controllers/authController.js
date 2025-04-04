@@ -68,6 +68,11 @@ exports.login = async (req, res) => {
 
 // Logout
 exports.logout = (req, res) => {
-  res.cookie("jwt", "", { httpOnly: true, expires: new Date(0) });
-  res.json({ message: "ออกจากระบบสำเร็จ" });
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production", // ใช้ secure cookie เฉพาะตอน production
+    sameSite: "Strict", // หรือ 'Lax' ตามความเหมาะสม
+  });
+
+  res.status(200).json({ message: "ออกจากระบบสำเร็จ" });
 };
