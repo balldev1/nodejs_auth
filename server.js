@@ -15,10 +15,16 @@ app.use(cookieParser());
 app.use("/api/auth", require("./routes/authRoutes"));
 // สำหรับการเข้าถึงไฟล์อัปโหลด
 // app.use("/uploads", express.static(path.join(__dirname, "public")));
+
 // เส้นทางสำหรับ API
 app.use("/network", express.static(path.join(__dirname, "public", "network")));
+app.use(
+  "/programmer",
+  express.static(path.join(__dirname, "public", "programmer"))
+);
 
 app.use("/api/auth/network", require("./routes/networkRoute"));
+app.use("/api/auth/programmer", require("./routes/programmerRoute"));
 
 const PORT = process.env.PORT || 5555;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
