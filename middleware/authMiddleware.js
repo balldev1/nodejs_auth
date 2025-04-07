@@ -4,7 +4,6 @@ require("dotenv").config(); // โหลดตัวแปรจาก .env
 // Middleware สำหรับตรวจสอบ JWT
 const checkJwt = (req, res, next) => {
   const token = req.cookies["token"]; // ใช้ชื่อ Cookie ที่คุณตั้งไว้
-  console.log(token);
   if (!token) {
     console.log("No token provided"); // Log เมื่อไม่มี token
     return res.status(401).json({ message: "Authentication required" });

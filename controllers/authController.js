@@ -4,9 +4,13 @@ const bcrypt = require("bcryptjs");
 
 // สร้าง JWT Token
 const generateToken = (user) => {
-  return jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
-  });
+  return jwt.sign(
+    { id: user._id, username: user.username },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "1h",
+    }
+  );
 };
 
 // ฟังก์ชันสำหรับโปรไฟล์ของผู้ใช้งาน

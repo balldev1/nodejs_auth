@@ -14,6 +14,7 @@ router.post("/register", register);
 router.post("/login", login);
 router.post("/logout", logout);
 
+// profile
 router.get("/profile", protect, (req, res) => {
   res.json({
     user: req.user,
