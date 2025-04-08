@@ -26,6 +26,7 @@ app.use(
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/auth/network", require("./routes/networkRoute"));
 app.use("/api/auth/programmer", require("./routes/programmerRoute"));
+app.use("/api/auth/exchange-rate", require("./routes/currencyRoute"));
 
 const PORT = process.env.PORT || 5555;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
